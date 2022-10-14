@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Document</title>
+    <link rel="stylesheet" href="app.css">
+
+</head>
+<body>
+    <h1>Hola</h1>
+    <p>como estas?</p>
+    <h2>Registro de información</h2>
+    <div id="formContainer">
+        <input type="text" placeholder="ingrese el id" id="idcostume">
+        <input type="text" placeholder="ingrese el name" id="name">
+        <input type="text" placeholder="ingrese el brand" id="brand">
+        <input type="text" placeholder="ingrese el year" id="year">
+        <input type="text" placeholder="ingrese el description" id="description">
+        <input type="text" placeholder="ingrese el idcategory" id="idcategory">
+        <button onclick="getCostumes()">Enviar</button>
+        <button onclick="updateCostume()">Actualizar</button>
+        <button onclick="deleteCostume()">Borrar</button>
+    </div>
+    <p id="toChange">aquí nadando</p>
+    <h2> Marcas de Quatrimoto</h2>
+    <div id="response"></div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script src="app.js"></script>
+</body>
+</html>
