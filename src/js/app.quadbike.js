@@ -1,7 +1,8 @@
-const API_URL = "http://localhost:8081/api/";
+//const API_URL = "http://localhost:8081/api/";
+const API_URL = "http://150.136.244.240:8080/api/";
 
 function getQuadbike() {
-  //$responseContainer.innerHTML='Texto agregado desde javascript';
+  //elemento del DOM->document object model
   $.ajax({
     url: `${API_URL}Quadbike/all`,
     type: "GET",
@@ -12,7 +13,39 @@ function getQuadbike() {
 
 function renderQuadbike(response) {
   const $responseContainer = document.getElementById("response");
-  // console.log(response);
+  $responseContainer.innerHTML = "";
+  for (let x = 0; x < response.length; x++) {
+    const row = response[x];
+    $responseContainer.innerHTML += renderCard(
+      row.id,
+      row.name,
+      row.description,
+      row.brand,
+      row.year
+    );
+  }
+}
+
+function renderCard(id, name, description, brand, year) {
+  return `
+  <div class="card">
+      <h1>${name}</h1>
+      <p class="price">${brand}</p>
+      <p>
+      ${description}
+      </p>
+      <p>
+      ${year}
+      </p>
+      <p><button onclick="renderQuadbikeToUpdate(${id},'${name}','${description}','${brand}',${year})">Actualizar</button></p>
+      <p><button onclick="deleteQuadbike(${id})" >Borrar</button></p>
+    </div>
+  `;
+}
+
+/*function renderQuadbike(response) {
+  const $responseContainer = document.getElementById("response");
+  $responseContainer.innerHTML='';
   for (let x = 0; x < response.length; x++) {
     const row = response[x];
     $responseContainer.innerHTML += `
@@ -24,36 +57,33 @@ function renderQuadbike(response) {
             ${row.name}
         </td>
         <td>
-            ${row.brand}
+            ${row.description}
         </td>
         <td>
-            ${row.description}
+            ${row.brand}
         </td>
         <td>
             ${row.year}
         </td>
         <td>
-            ${row.idcategory}
+            <button onclick="renderQuadbikeToUpdate(${row.id},'${row.name}','${row.description}','${row.brand}',${row.year},${row.category?.id})">Actualizar</button>
         </td>
         <td>
-            <button onclike=renderQuadbikeToUpdate(${row.id},'${row.name}','${row.description}', '${row.brand}', ${row.year}, ${row.category.id})>Actualizar</button>
-        </td>
-        <td>
-            <button onclike=deleteQuadbike(${row.id})>Eliminar</button>
+            <button onclick="deleteQuadbike(${row.id})">Eliminar</button>
         </td>
     </tr>
-    `;
+        `;
   }
-}
-//como hago para cambiar el codigo de 200 a 201?
+}*/
+
 function createQuadbike() {
   let dataToSend = {
     name: $("#name").val(),
+    description: $("#description").val(),
     brand: $("#brand").val(),
     year: parseInt($("#year").val()),
-    description: $("#description").val(),
     category: {
-        id: parseInt($("#category").val()),
+      id: parseInt($("#category").val()),
     },
   };
   dataToSend = JSON.stringify(dataToSend);
@@ -68,30 +98,30 @@ function createQuadbike() {
   };
 
   $.ajax(settings).done(function (response) {
-   alert("Quadbike register successful")
-   $("#name").val("")
-   $("#brand").val("")
-   $("#year").val("")
-   $("#description").val("")
-   $("#category").val("")
+    alert("Quadbike registrada correctamente");
+    $("#name").val("");
+    $("#description").val("");
+    $("#brand").val("");
+    $("#year").val("");
+    $("#category").val("");
+
+    getQuadbike()
   });
 }
 
 function updateQuadbike() {
   let dataToSend = {
     name: $("#name").val(),
+    description: $("#description").val(),
     brand: $("#brand").val(),
     year: parseInt($("#year").val()),
-    description: $("#description").val(),
-    category: {
-        id: parseInt($("#category").val()),
-    },
+    id:parseInt($("#id").val())
   };
   dataToSend = JSON.stringify(dataToSend);
 
   const settings = {
     url: `${API_URL}Quadbike/update`,
-    method: "PUST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -99,47 +129,29 @@ function updateQuadbike() {
   };
 
   $.ajax(settings).done(function (response) {
-   alert("Quadbike register successful")
-   $("#name").val("")
-   $("#brand").val("")
-   $("#year").val("")
-   $("#description").val("")
-   $("#category").val("")
+    alert("Quadbike actualizada correctamente");
+    $("#id").val("");
+    $("#name").val("");
+    $("#description").val("");
+    $("#brand").val("");
+    $("#year").val("");
+    $("#category").val("");
+    getQuadbike()
   });
-
-  getQuadbike();
 }
-//en donde se actualiza la tabla sin recargar
-function renderQuadbikeToUpdate(id, name, description, brand, category) {
-  
-   $("#idcostume").val(id),
-    $("#name").val(name),
-    $("#brand").val(brand),
-    $("#year").val(year),
-    $("#description").val(description),
-    $("#category").val(category)
-  
- /* dataToSend = JSON.stringify(dataToSend);
 
-  const settings = {
-    url: `${API_URL}Quadbike/update`,
-    type: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: dataToSend,
-  };
-
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-  });*/
+function renderQuadbikeToUpdate(id, name, description, brand, year, category) {
+  $("#id").val(id);
+  $("#name").val(name);
+  $("#brand").val(brand);
+  $("#year").val(year);
+  $("#description").val(description);
+  $("#category").val(category);
 }
 
 function deleteQuadbike(id) {
-
-
   const settings = {
-    url: `${API_URL}Quadbike/delete/${id}`,
+    url: `${API_URL}Quadbike/${id}`,
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -148,7 +160,8 @@ function deleteQuadbike(id) {
   };
 
   $.ajax(settings).done(function (response) {
-    alert("Quadbike delete successful")
+    alert("Quadbike eliminado correctamente");
+    getQuadbike()
   });
 }
 

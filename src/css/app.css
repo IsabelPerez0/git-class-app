@@ -14,11 +14,12 @@ input {
 }
 
 button {
-  display: block;
   margin: auto;
+  display: block;
 }
 
 table {
+  border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
   border: 1px solid #ddd;
@@ -34,7 +35,6 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-/*STYLES FORMULARIO REGISTER*/
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -52,7 +52,8 @@ body {
 /* Full-width input fields */
 input[type="text"],
 input[type="number"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;

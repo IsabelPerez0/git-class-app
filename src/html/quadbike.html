@@ -4,107 +4,85 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Quadbike</title>
     <link rel="stylesheet" href="../css/app.css" />
+    <link rel="stylesheet" href="../css/quadbike.css" />
   </head>
   <body>
-    <h2>Registro de Quadbike</h2>
-    <div id="formContainer">
-      <!--    <input type="text" placeholder="ingrese el id" id="id">
-        <input type="text" placeholder="ingrese el brand" id="brand">
-        <input type="text" placeholder="ingrese el name" id="name">
-        <input type="text" placeholder="ingrese el description" id="description">
-        <input type="text" placeholder="ingrese el year" id="year">
-        <input type="text" placeholder="ingrese el idcategory" id="idcategory">
-        <button onclick="createQuadbike()">Enviar</button>
-        <button onclick="updateQuadbike()">Actualizar</button>
-        <button onclick="deleteQuadbike()">Borrar</button> -->
+    <div>
       <form action="/action_page.php">
         <div class="container">
-          <h1>Registro de Quadbike</h1>
-          <p>Please fill the inforamtion of quadbike</p>
-          <hr />
+          <div id="formContainer">
+           
+            <h1>Registro de Quadbike</h1>
+            <p>Por favor ingrese la información del quadbike</p>
+            <hr />
 
-          <input
-            type="text"
-            name="id"
-            id="id"
-            required
-          />
+            <input
+              type="text"              
+              id="id"   
+              readonly           
+            />
+            <label for="name"><b>Nombre</b></label>
+            <input
+              type="text"
+              placeholder="ingrese el nombre"
+              id="name"
+              required
+            />
+            <label for="description"><b>Descripción</b></label>
+            <input
+              type="text"
+              placeholder="Descripción"
+              id="description"
+              required
+            />
 
-          <label for="name"><b>Name</b></label>
-          <input
-            type="text"
-            placeholder="Enter Name"
-            name="name"
-            id="name"
-            required
-          />
+            <label for="brand"><b>Marca</b></label>
+            <input type="text" placeholder="Marca" id="brand" required />
 
-          <label for="brand"><b>Brand</b></label>
-          <input
-            type="text"
-            placeholder="Enter Brand"
-            name="brand"
-            id="brand"
-            required
-          />
+            <label for="year"><b>Año</b></label>
+            <input type="number" placeholder="Año" id="year" required />
+            <label for="category"><b>Categoría</b></label>
+            <input
+              type="number"
+              placeholder="Categoría"
+              id="category"
+              required
+            />
+            <hr />
 
-          <label for="year"><b>Year</b></label>
-          <input
-            type="number"
-            placeholder="Enter Year"
-            name="year"
-            id="year"
-            required
-          />
-
-          <label for="description"><b>Description</b></label>
-          <input
-            type="text"
-            placeholder="Enter description"
-            name="description"
-            id="description"
-            required
-          />
-
-          <label for="category"><b>Id Category</b></label>
-          <input
-            type="number"
-            placeholder="Enter Id Category"
-            name="category"
-            id="category"
-            required
-          />
-
-          <hr />
-
-          <button type="button" class="registerbtn" onclick="createQuadbike()">
-            Register
-          </button>
+            <button
+              type="button"
+              class="registerbtn"
+              onclick="createQuadbike()"
+            >
+              Registrar
+            </button>
+          </div>
         </div>
       </form>
 
-      <button class="registerbtn info" onclick="updateQuadbike()">Actualizar</button>
-      <button class="registerbtn danger" onclick="deleteQuadbike()">Borrar</button>
+      <button class="registerbtn info" onclick="updateQuadbike()">
+        Actualizar
+      </button>      
     </div>
-  
-    <h2>Quadbikes disponible en la aplicación</h2>
 
-    <table>
+    <h2>Quadbikes disponibles en la aplicación</h2>
+    
+    <div id="response"></div>
+   <!-- <table>
       <thead>
         <tr>
           <td>Id</td>
-          <td>Name</td>
-          <td>Brand</td>
-          <td>Description</td>
-          <td>Year</td>
-          <td>Category</td>
+          <td>Nombre</td>
+          <td>Descripción</td>
+          <td>Marca</td>
+          <td>Año</td>
         </tr>
       </thead>
       <tbody id="response"></tbody>
-    </table>
+    </table> -->
 
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
